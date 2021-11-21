@@ -24,6 +24,9 @@ open class ChartLimitLine: ComponentBase
         case topRight
         case bottomLeft
         case bottomRight
+        // [Thinkyeah] put labels outside left and right, do not use them for xAxis
+        case left
+        case right
     }
     
     /// limit / maximum (the y-value or xIndex)

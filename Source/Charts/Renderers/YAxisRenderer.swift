@@ -312,10 +312,12 @@ open class YAxisRenderer: AxisRendererBase
             context.saveGState()
             defer { context.restoreGState() }
             
-            var clippingRect = viewPortHandler.contentRect
-            clippingRect.origin.y -= l.lineWidth / 2.0
-            clippingRect.size.height += l.lineWidth
-            context.clip(to: clippingRect)
+            if l.labelPosition != .left && l.labelPosition != .right {
+                var clippingRect = viewPortHandler.contentRect
+                clippingRect.origin.y -= l.lineWidth / 2.0
+                clippingRect.size.height += l.lineWidth
+                context.clip(to: clippingRect)
+            }
             
             position.x = 0.0
             position.y = CGFloat(l.limit)
@@ -378,13 +380,34 @@ open class YAxisRenderer: AxisRendererBase
                         align: .left,
                         attributes: [NSAttributedString.Key.font: l.valueFont, NSAttributedString.Key.foregroundColor: l.valueTextColor])
                 }
-                else
+                else if l.labelPosition == .bottomLeft
                 {
                     ChartUtils.drawText(context: context,
                         text: label,
                         point: CGPoint(
                             x: viewPortHandler.contentLeft + xOffset,
                             y: position.y + yOffset - labelLineHeight),
+                        align: .left,
+                        attributes: [NSAttributedString.Key.font: l.valueFont, NSAttributedString.Key.foregroundColor: l.valueTextColor])
+                }
+                // [Thinkyeah]
+                else if l.labelPosition == .left
+                {
+                    ChartUtils.drawText(context: context,
+                        text: label,
+                        point: CGPoint(
+                            x: viewPortHandler.contentLeft - l.xOffset,
+                            y: position.y - labelLineHeight / 2),
+                        align: .right,
+                        attributes: [NSAttributedString.Key.font: l.valueFont, NSAttributedString.Key.foregroundColor: l.valueTextColor])
+                }
+                else // right
+                {
+                    ChartUtils.drawText(context: context,
+                        text: label,
+                        point: CGPoint(
+                            x: viewPortHandler.contentRight + l.xOffset,
+                            y: position.y - labelLineHeight / 2),
                         align: .left,
                         attributes: [NSAttributedString.Key.font: l.valueFont, NSAttributedString.Key.foregroundColor: l.valueTextColor])
                 }
