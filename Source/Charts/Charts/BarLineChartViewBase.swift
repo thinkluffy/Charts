@@ -695,7 +695,8 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             // If drag is enabled and we are in a position where there's something to drag:
             //  * If we're zoomed in, then obviously we have something to drag.
             //  * If we have a drag offset - we always have something to drag
-            if !self.hasNoDragOffset || !self.isFullyZoomedOut
+            let dragToMoveHighlight = self.isHighlightPerDragEnabled && self.dragMoveHighlightFirst
+            if (!self.hasNoDragOffset || !self.isFullyZoomedOut) && !dragToMoveHighlight
             {
                 _isDragging = true
                 
@@ -1592,6 +1593,9 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             _dragYEnabled = newValue
         }
     }
+    
+    /// [Thinkyeah] if true, drag will not move chart, only move the highlight
+    @objc open var dragMoveHighlightFirst = false
     
     /// is scaling enabled? (zooming in and out by gesture) for the chart (this does not affect dragging).
     @objc open func setScaleEnabled(_ enabled: Bool)
