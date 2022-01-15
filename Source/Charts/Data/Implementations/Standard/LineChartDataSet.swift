@@ -138,6 +138,8 @@ open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
     /// formatter for customizing the position of the fill-line
     private var _fillFormatter: IFillFormatter = DefaultFillFormatter()
     
+    private var _fillFormatterForEachEntry: IFillFormatterForEachEntry?
+
     /// Sets a custom IFillFormatter to the chart that handles the position of the filled-line for each DataSet. Set this to null to use the default logic.
     open var fillFormatter: IFillFormatter?
     {
@@ -148,6 +150,18 @@ open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
         set
         {
             _fillFormatter = newValue ?? DefaultFillFormatter()
+        }
+    }
+    
+    open var fillFormatterForEachEntry: IFillFormatterForEachEntry?
+    {
+        get
+        {
+            return _fillFormatterForEachEntry
+        }
+        set
+        {
+            _fillFormatterForEachEntry = newValue
         }
     }
     

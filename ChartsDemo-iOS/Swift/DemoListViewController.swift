@@ -83,8 +83,11 @@ class DemoListViewController: UIViewController {
                             subtitle: "Simple demonstration of a time-chart. This chart draws one line entry per hour originating from the current time in milliseconds.",
                             class: LineChartTimeViewController.self),
                     ItemDef(title: "Filled Line Chart",
-                            subtitle: "This demonstrates how to fill an area between two LineDataSets.",
+                            subtitle: "This demonstrates how to fill an area above or below LineDataSet.",
                             class: LineChartFilledViewController.self),
+                    ItemDef(title: "Filled Line Chart2",
+                            subtitle: "This demonstrates how to fill an area between two LineDataSets.",
+                            class: LineChartFilled2ViewController.self),
                     ItemDef(title: "Half Pie Chart",
                             subtitle: "This demonstrates how to create a 180 degree PieChart.",
                             class: HalfPieChartViewController.self)
